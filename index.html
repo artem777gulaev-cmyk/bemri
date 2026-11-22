@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бемри (BemriCore AI) — скачать ИИ бот для Windows (Бета-версия) | ARTEM(BM)</title>
+    <meta name="description" content="Бемри (BemriCore) — модульный ИИ бот на ПК от ARTEM(BM). Бета-версия с анимированным лицом, русской озвучкой, памятью и математикой. Возможны обновления. Заходи в (BM)!!!">
+    <meta name="keywords" content="бемри, bemri, bemricore, ии бот, скачать ии бот, умный бот на пк, голосовой помощник windows, artem(bm), artem bm, бета версия">
+    <meta name="author" content="ARTEM(BM)">
+    <meta name="robots" content="index, follow">
+    <style>
+        :root {
+            --bg-dark: #0e1117;
+            --bg-card: #161b24;
+            --neon-blue: #00c3ff;
+            --neon-green: #28f582;
+            --neon-purple: #aa5aff;
+            --neon-orange: #ff9d2e;
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        html, body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-y: auto;
+            height: auto;
+        }
+        header {
+            background: rgba(14, 17, 23, 0.95);
+            border-bottom: 1px solid #263042;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: 1.5px; color: var(--neon-blue); }
+        .logo span { color: var(--neon-green); }
+        nav a { color: var(--text-main); text-decoration: none; margin-left: 20px; font-weight: 500; }
+        nav a:hover { color: var(--neon-blue); }
+        .hero {
+            text-align: center;
+            padding: 60px 5% 50px;
+            background: radial-gradient(circle at center, #162235 0%, var(--bg-dark) 75%);
+            border-bottom: 1px solid #1f293a;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(0, 195, 255, 0.12);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+        .clan-banner {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--neon-green);
+            margin-bottom: 14px;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 16px; color: #ffffff; }
+        .hero p { max-width: 680px; margin: 0 auto 24px; font-size: 1.1rem; color: var(--text-muted); }
+        .beta-notice {
+            max-width: 660px;
+            margin: 0 auto 28px;
+            background: rgba(255, 157, 46, 0.12);
+            border: 1px solid var(--neon-orange);
+            color: #ffd5a1;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+        }
+        .beta-notice strong { color: var(--neon-orange); }
+        .btn-download {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--neon-blue), #0077ff);
+            color: #05080c;
+            font-weight: 800;
+            font-size: 1.2rem;
+            padding: 16px 38px;
+            border-radius: 10px;
+            text-decoration: none;
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.45);
+        }
+        .btn-download:hover { background: linear-gradient(135deg, var(--neon-green), var(--neon-blue)); }
+        .meta-info { margin-top: 14px; font-size: 0.85rem; color: var(--text-muted); }
+        .section { padding: 55px 5%; max-width: 1150px; margin: 0 auto; }
+        .section h2 { text-align: center; font-size: 1.9rem; margin-bottom: 32px; color: #fff; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+        .card { background: var(--bg-card); border: 1px solid #252f40; border-radius: 12px; padding: 24px; }
+        .card h3 { color: var(--neon-green); margin-bottom: 10px; font-size: 1.2rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; }
+        .steps, .support-box { background: var(--bg-card); border: 1px solid #252f40; border-radius: 14px; padding: 30px; }
+        .step-item { margin-bottom: 16px; padding-left: 16px; border-left: 3px solid var(--neon-blue); }
+        .step-item strong { color: #fff; display: block; font-size: 1.05rem; }
+        .step-item span { color: var(--text-muted); font-size: 0.95rem; }
+        .support-box { border-color: rgba(170, 90, 255, 0.45); max-width: 720px; margin: 0 auto; }
+        .support-box h3 { color: var(--neon-purple); font-size: 1.4rem; margin-bottom: 10px; text-align: center; }
+        .support-box p { color: var(--text-muted); text-align: center; margin-bottom: 20px; }
+        .feedback-form { display: flex; flex-direction: column; gap: 14px; }
+        .feedback-form input, .feedback-form select, .feedback-form textarea {
+            width: 100%; background: #0e1117; border: 1px solid #2d384d; border-radius: 8px; padding: 12px; color: #fff; font-size: 0.95rem;
+        }
+        .btn-send { background: linear-gradient(135deg, var(--neon-purple), #6c2bd9); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px; border: none; border-radius: 8px; cursor: pointer; }
+        .form-status { text-align: center; color: var(--neon-green); font-weight: 600; display: none; margin-top: 8px; }
+        .max-contact { margin-top: 20px; padding-top: 16px; border-top: 1px solid #252f40; text-align: center; font-size: 0.95rem; color: var(--text-muted); }
+        .max-contact span { color: #fff; font-weight: 700; }
+        footer { text-align: center; padding: 30px 5%; border-top: 1px solid #1f293a; color: var(--text-muted); font-size: 0.9rem; margin-top: 30px; }
+        footer .clan-footer { color: var(--neon-green); font-weight: 800; margin-top: 6px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">BEMRI<span>CORE</span> AI</div>
+    <nav>
+        <a href="#features">Возможности</a>
+        <a href="#install">Установка</a>
+        <a href="#support">Обратная связь</a>
+        <a href="#download">Скачать</a>
+    </nav>
+</header>
+
+<section class="hero" id="download">
+    <div class="badge">BETA 1.0 • WINDOWS 10 / 11 • СОЗДАТЕЛЬ: ARTEM(BM)</div>
+    <div class="clan-banner">⚡ ЗАХОДИ В (BM)!!! ⚡</div>
+    <h1>Бемри — живой ИИ бот с характером и голосом</h1>
+    <p>Официальный сайт проекта <strong>Бемри (BemriCore)</strong> от <strong>ARTEM(BM)</strong>. Это автономный ИИ бот для компьютера на C++ с анимированным пиксельным лицом, нейросетевой визуализацией, русской озвучкой, памятью и математическим ядром.</p>
+    <div class="beta-notice">
+        ⚠️ <strong>Внимание — это ранняя бета-версия!</strong> Сейчас Бемри только развивается, поэтому он ещё не очень умный и знает не всё. Проект активно дорабатывается — <strong>возможны частые обновления</strong> с новыми функциями и улучшенным интеллектом!
+    </div>
+    <a href="BemriCore.zip" download class="btn-download">⬇ СКАЧАТЬ БЕМРИ (BETA)</a>
+    <div class="meta-info">Архив ZIP • Бесплатно • Не требует установки • Разработчик: ARTEM(BM)</div>
+</section>
+
+<section class="section" id="features">
+    <h2>Что уже умеет ИИ бот Бемри?</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>😊 Живые эмоции и лицо</h3>
+            <p>Бемри реагирует на твои слова: радуется похвале, обижается на грубость, умеет кричать, плакать и менять мимику на встроенном OLED-дисплее.</p>
+        </div>
+        <div class="card">
+            <h3>🔊 Голосовая озвучка</h3>
+            <p>Встроенный речевой модуль озвучивает ответы ИИ бота на русском языке в реальном времени, меняя интонацию в зависимости от настроения.</p>
+        </div>
+        <div class="card">
+            <h3>🧠 Долговременная память</h3>
+            <p>При первом запуске Бемри знакомится с тобой, запоминает имя, возраст и сохраняет историю фактов в локальную базу знаний.</p>
+        </div>
+        <div class="card">
+            <h3>🌐 Интернет и математика</h3>
+            <p>ИИ бот умеет решать математические примеры, играть в мини-игры и искать краткие справки в интернете прямо из окна чата.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="install">
+    <h2>Как запустить Бемри на ПК</h2>
+    <div class="steps">
+        <div class="step-item">
+            <strong>Шаг 1. Скачай архив BemriCore.zip</strong>
+            <span>Нажми на кнопку «Скачать Бемри» выше и дождись загрузки архива на компьютер.</span>
+        </div>
+        <div class="step-item">
+            <strong>Шаг 2. Распакуй в любую папку</strong>
+            <span>Извлеки все файлы из архива — программа автоматически создаст папку <code>data</code> при первом запуске.</span>
+        </div>
+        <div class="step-item">
+            <strong>Шаг 3. Запусти BemriCore.exe и познакомься</strong>
+            <span>Открой программу, введи своё имя, фамилию и возраст в окне анкеты — после этого ядро ИИ бота запустится автоматически.</span>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="support">
+    <div class="support-box">
+        <h3>🛠 Обратная связь и баг-репорты</h3>
+        <p>Нашли ошибку, недочёт в бета-версии или есть идея, чему ещё научить Бемри? Напишите сообщение напрямую разработчику <strong>ARTEM(BM)</strong>!</p>
+        <form class="feedback-form" onsubmit="sendFeedback(event)">
+            <input type="text" id="fbName" placeholder="Твоё имя или ник" required>
+            <select id="fbType">
+                <option value="Баг / недочёт">🐞 Нашёл баг или недочёт</option>
+                <option value="Идея для обновления">💡 Идея для обновления Бемри</option>
+                <option value="Вопрос">❓ Вопрос по программе</option>
+            </select>
+            <textarea id="fbText" rows="4" placeholder="Опиши подробно проблему или идею..." required></textarea>
+            <button type="submit" class="btn-send">📨 ОТПРАВИТЬ СООБЩЕНИЕ</button>
+            <div class="form-status" id="fbStatus">✅ Спасибо! Сообщение записано для ARTEM(BM).</div>
+        </form>
+        <div class="max-contact">
+            Также для быстрой связи в мессенджере MAX: <span>[Впиши сюда свой ник в MAX]</span>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Бемри (BemriCore AI — Beta) — ИИ бот для Windows. Создатель проекта: ARTEM(BM).</p>
+    <p class="clan-footer">ЗАХОДИ В (BM)!!!</p>
+</footer>
+
+<script>
+    function sendFeedback(e) {
+        e.preventDefault();
+        document.getElementById('fbStatus').style.display = 'block';
+        e.target.reset();
+    }
+</script>
+
+</body>
+</html>
+
