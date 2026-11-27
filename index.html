@@ -1,302 +1,878 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бемри (BemriCore AI v2.0) — скачать ИИ бот для Windows | ARTEM(BM)</title>
-    <meta name="description" content="Бемри (BemriCore AI v2.0) — модульный самообучающийся ИИ бот на ПК от ARTEM(BM). Анимированное 60 FPS лицо, русская озвучка, анкета знакомства, генерация речи и выход в интернет.">
-    <meta name="keywords" content="бемри, bemri, bemricore, ии бот, скачать ии бот, умный бот на пк, голосовой помощник windows, artem(bm), artem bm, бета 2.0">
-    <meta name="author" content="ARTEM(BM)">
-    <meta name="robots" content="index, follow">
-    <style>
-        :root {
-            --bg-dark: #0e1117;
-            --bg-card: #161b24;
-            --neon-blue: #00c3ff;
-            --neon-green: #28f582;
-            --neon-purple: #aa5aff;
-            --neon-orange: #ff9d2e;
-            --text-main: #e6edf3;
-            --text-muted: #8b949e;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        html, body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-y: auto;
-            height: auto;
-        }
-        header {
-            background: rgba(14, 17, 23, 0.95);
-            border-bottom: 1px solid #263042;
-            padding: 16px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: 1.5px; color: var(--neon-blue); }
-        .logo span { color: var(--neon-green); }
-        nav a { color: var(--text-main); text-decoration: none; margin-left: 20px; font-weight: 500; }
-        nav a:hover { color: var(--neon-blue); }
-        .hero {
-            text-align: center;
-            padding: 60px 5% 50px;
-            background: radial-gradient(circle at center, #162235 0%, var(--bg-dark) 75%);
-            border-bottom: 1px solid #1f293a;
-        }
-        .badge {
-            display: inline-block;
-            background: rgba(40, 245, 130, 0.14);
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
-            padding: 5px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 14px;
-            font-weight: 700;
-        }
-        .clan-banner {
-            display: block;
-            font-size: 1.3rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: var(--neon-green);
-            margin-bottom: 14px;
-        }
-        h1 { font-size: 2.5rem; margin-bottom: 16px; color: #ffffff; }
-        .hero p { max-width: 700px; margin: 0 auto 24px; font-size: 1.1rem; color: var(--text-muted); }
-        .beta-notice {
-            max-width: 680px;
-            margin: 0 auto 28px;
-            background: rgba(255, 157, 46, 0.12);
-            border: 1px solid var(--neon-orange);
-            color: #ffd5a1;
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-        }
-        .beta-notice strong { color: var(--neon-orange); }
-        .btn-download {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--neon-blue), #0077ff);
-            color: #05080c;
-            font-weight: 800;
-            font-size: 1.2rem;
-            padding: 16px 38px;
-            border-radius: 10px;
-            text-decoration: none;
-            box-shadow: 0 0 25px rgba(0, 195, 255, 0.45);
-            transition: 0.2s;
-        }
-        .btn-download:hover { background: linear-gradient(135deg, var(--neon-green), var(--neon-blue)); transform: translateY(-2px); }
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 24px;
-        }
-        .stat-pill {
-            background: rgba(22, 27, 36, 0.95);
-            border: 1px solid #2b384e;
-            padding: 10px 22px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        .stat-pill strong {
-            color: var(--neon-blue);
-            font-size: 1.15rem;
-            margin-left: 6px;
-        }
-        .stat-pill.dl strong { color: var(--neon-green); }
-        .meta-info { margin-top: 14px; font-size: 0.85rem; color: var(--text-muted); }
-        .section { padding: 55px 5%; max-width: 1150px; margin: 0 auto; }
-        .section h2 { text-align: center; font-size: 1.9rem; margin-bottom: 32px; color: #fff; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
-        .card { background: var(--bg-card); border: 1px solid #252f40; border-radius: 12px; padding: 24px; }
-        .card h3 { color: var(--neon-green); margin-bottom: 10px; font-size: 1.2rem; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; }
-        .changelog-box {
-            background: linear-gradient(145deg, #161c27, #111620);
-            border: 1px solid rgba(0, 195, 255, 0.4);
-            border-radius: 14px;
-            padding: 28px 32px;
-            box-shadow: 0 0 25px rgba(0, 195, 255, 0.08);
-        }
-        .changelog-box ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-        .changelog-box li { padding-left: 24px; position: relative; color: #d0d7de; font-size: 0.98rem; }
-        .changelog-box li::before { content: "✦"; position: absolute; left: 0; color: var(--neon-green); font-weight: bold; }
-        .changelog-box li strong { color: var(--neon-blue); }
-        .steps, .support-box { background: var(--bg-card); border: 1px solid #252f40; border-radius: 14px; padding: 30px; }
-        .step-item { margin-bottom: 16px; padding-left: 16px; border-left: 3px solid var(--neon-blue); }
-        .step-item strong { color: #fff; display: block; font-size: 1.05rem; }
-        .step-item span { color: var(--text-muted); font-size: 0.95rem; }
-        .support-box { border-color: rgba(170, 90, 255, 0.45); max-width: 720px; margin: 0 auto; }
-        .support-box h3 { color: var(--neon-purple); font-size: 1.4rem; margin-bottom: 10px; text-align: center; }
-        .support-box p { color: var(--text-muted); text-align: center; margin-bottom: 20px; }
-        .feedback-form { display: flex; flex-direction: column; gap: 14px; }
-        .feedback-form input, .feedback-form select, .feedback-form textarea {
-            width: 100%; background: #0e1117; border: 1px solid #2d384d; border-radius: 8px; padding: 12px; color: #fff; font-size: 0.95rem;
-        }
-        .btn-send { background: linear-gradient(135deg, var(--neon-purple), #6c2bd9); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px; border: none; border-radius: 8px; cursor: pointer; }
-        .form-status { text-align: center; color: var(--neon-green); font-weight: 600; display: none; margin-top: 8px; }
-        .max-contact { margin-top: 20px; padding-top: 16px; border-top: 1px solid #252f40; text-align: center; font-size: 0.95rem; color: var(--text-muted); }
-        .max-contact span { color: #fff; font-weight: 700; }
-        footer { text-align: center; padding: 30px 5%; border-top: 1px solid #1f293a; color: var(--text-muted); font-size: 0.9rem; margin-top: 30px; }
-        footer .clan-footer { color: var(--neon-green); font-weight: 800; margin-top: 6px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEMRI CORE — Пиксельный автономный ИИ от ARTEM BM</title>
+<meta name="description" content="Скачать BEMRI CORE — автономный пиксельный искусственный интеллект от ARTEM BM. Вступай в клан (BM)!">
+<style>
+  :root {
+    --bg: #05070c;
+    --card: rgba(14, 19, 30, 0.85);
+    --border: rgba(0, 210, 255, 0.25);
+    --cyan: #00d2ff;
+    --mint: #28f582;
+    --fire: #ff6e14;
+    --purple: #9d50ff;
+    --text: #e6f0ff;
+    --muted: #8ea4c8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.65;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  #intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: introGlowIn 1.6s ease forwards;
+    transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s ease, visibility 0.9s;
+  }
+  @keyframes introGlowIn {
+    0% { background: #000000; }
+    100% { background: radial-gradient(circle at center, #0c1628 0%, #020306 85%); }
+  }
+  #intro-overlay.closed {
+    opacity: 0;
+    transform: scale(1.06);
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .intro-card {
+    max-width: 480px;
+    width: 100%;
+    background: rgba(10, 15, 26, 0.94);
+    border: 2px solid var(--cyan);
+    border-radius: 18px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(0, 210, 255, 0.28);
+    animation: cardPop 0.9s cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+  @keyframes cardPop {
+    0% { opacity: 0; transform: translateY(25px) scale(0.92); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  #intro-oled {
+    width: 240px;
+    height: 120px;
+    background: #030508;
+    border: 2px solid #1e293b;
+    border-radius: 10px;
+    margin: 0 auto 18px;
+    display: block;
+    image-rendering: pixelated;
+  }
+  .intro-text {
+    font-family: 'Consolas', monospace;
+    font-size: 1rem;
+    color: #e2f6ff;
+    min-height: 76px;
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+  .agree-btn {
+    padding: 15px 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--mint), #059669);
+    color: #020813;
+    font-weight: 800;
+    font-size: 1.02rem;
+    font-family: 'Consolas', monospace;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(40, 245, 130, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .agree-btn:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 12px 36px rgba(40, 245, 130, 0.6);
+  }
+
+  #action-dimmer {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    background: rgba(2, 4, 9, 0.88);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+  }
+  #action-dimmer.active { opacity: 1; pointer-events: all; }
+
+  #bemri-actor {
+    position: fixed;
+    z-index: 960;
+    width: 280px;
+    background: rgba(10, 15, 26, 0.96);
+    border: 2px solid var(--mint);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    box-shadow: 0 0 45px rgba(40, 245, 130, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.7);
+    transition: left 0.65s cubic-bezier(0.2, 0.9, 0.25, 1), top 0.65s cubic-bezier(0.2, 0.9, 0.25, 1), opacity 0.4s, transform 0.4s;
+  }
+  #bemri-actor.visible { opacity: 1; transform: scale(1); }
+  #actor-oled {
+    width: 192px;
+    height: 96px;
+    background: #030508;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+    display: block;
+    margin: 0 auto 10px;
+    image-rendering: pixelated;
+  }
+  .actor-speech {
+    font-family: 'Consolas', monospace;
+    font-size: 0.86rem;
+    color: #fff;
+    line-height: 1.4;
+  }
+  #shatter-canvas, #bg-canvas { position: fixed; inset: 0; pointer-events: none; }
+  #shatter-canvas { z-index: 970; }
+  #bg-canvas { z-index: -1; }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(16px);
+    background: rgba(5, 7, 12, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .nav {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .logo {
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 1.2px;
+    font-family: 'Consolas', monospace;
+    background: linear-gradient(90deg, var(--cyan), var(--mint));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav-right { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+  .nav-links { display: flex; gap: 18px; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .music-toggle {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(0, 210, 255, 0.08);
+    color: var(--cyan);
+    font-size: 0.82rem;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+  }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  .hero {
+    padding: 64px 0 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 36px;
+    align-items: center;
+  }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; text-align: center; } }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    background: rgba(0, 210, 255, 0.1);
+    border: 1px solid var(--border);
+    color: var(--cyan);
+    font-family: 'Consolas', monospace;
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: clamp(2.1rem, 4.5vw, 3.25rem);
+    line-height: 1.15;
+    font-weight: 800;
+    margin-bottom: 18px;
+    background: linear-gradient(120deg, #ffffff 15%, var(--cyan) 55%, var(--mint) 95%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 6s linear infinite;
+  }
+  @keyframes shineText { to { background-position: 200% center; } }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 26px;
+    max-width: 560px;
+  }
+  @media (max-width: 860px) { .hero p { margin-left: auto; margin-right: auto; } }
+
+  .cta-group {
+    position: relative;
+    display: inline-flex;
+    min-height: 56px;
+    align-items: center;
+    z-index: 920;
+  }
+
+  .btn-primary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--cyan), #0088ff);
+    color: #030711;
+    font-weight: 800;
+    font-size: 1.04rem;
+    font-family: 'Consolas', monospace;
+    box-shadow: 0 10px 30px rgba(0, 210, 255, 0.35);
+    transition: transform 0.25s, box-shadow 0.35s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 45px rgba(0, 210, 255, 0.8);
+  }
+  .btn-primary.illuminated {
+    box-shadow: 0 0 55px rgba(0, 210, 255, 1), 0 0 95px rgba(40, 245, 130, 0.75);
+    transform: scale(1.06);
+  }
+  .btn-primary.destroyed {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .destroyed-note {
+    font-family: 'Consolas', monospace;
+    font-size: 0.9rem;
+    color: var(--mint);
+    padding: 12px 18px;
+    border: 1px dashed rgba(40, 245, 130, 0.45);
+    border-radius: 10px;
+    background: rgba(40, 245, 130, 0.08);
+    display: none;
+  }
+
+  .stats-bar { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+  @media (max-width: 860px) { .stats-bar { justify-content: center; } }
+  .stat-pill {
+    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-family: 'Consolas', monospace;
+  }
+  .stat-pill strong { color: var(--mint); font-size: 1.02rem; }
+
+  .oled-stage {
+    background: linear-gradient(160deg, rgba(18, 25, 40, 0.92), rgba(7, 10, 17, 0.98));
+    border: 2px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(0, 210, 255, 0.08);
+    text-align: center;
+    transition: border-color 0.35s ease;
+  }
+  .oled-stage:hover { border-color: var(--mint); }
+  #pixel-oled {
+    width: 100%;
+    max-width: 336px;
+    height: 168px;
+    background: #04060a;
+    border-radius: 10px;
+    border: 2px solid #1e293b;
+    display: block;
+    margin: 0 auto 14px;
+    image-rendering: pixelated;
+    cursor: pointer;
+  }
+  .bemri-speech {
+    background: rgba(5, 8, 15, 0.9);
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    border-radius: 12px;
+    padding: 12px 16px;
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Consolas', monospace;
+    font-size: 0.92rem;
+    color: #d8f8ff;
+    margin-bottom: 12px;
+    line-height: 1.45;
+  }
+  .next-phrase-btn {
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(40, 245, 130, 0.4);
+    background: rgba(40, 245, 130, 0.1);
+    color: var(--mint);
+    font-family: 'Consolas', monospace;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .next-phrase-btn:hover { background: rgba(40, 245, 130, 0.22); transform: translateY(-1px); }
+
+  .sticker-canvas {
+    width: 64px;
+    height: 48px;
+    background: #04060a;
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    image-rendering: pixelated;
+    display: inline-block;
+  }
+
+  section { padding: 44px 0; }
+  .sec-title { font-size: 1.75rem; font-weight: 700; margin-bottom: 10px; text-align: center; }
+  .sec-sub { color: var(--muted); text-align: center; max-width: 640px; margin: 0 auto 32px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 24px;
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--cyan);
+    box-shadow: 0 14px 34px rgba(0, 210, 255, 0.16);
+  }
+  .card h3 { color: var(--cyan); margin-bottom: 10px; font-size: 1.08rem; font-family: 'Consolas', monospace; }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+
+  .clan-max-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 24px;
+  }
+  .promo-box {
+    background: linear-gradient(145deg, rgba(18, 25, 44, 0.92), rgba(10, 14, 24, 0.96));
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+  }
+  .promo-box.purple { border-color: rgba(157, 80, 255, 0.45); }
+  .promo-box h2 { font-size: 1.45rem; margin-bottom: 10px; color: #fff; }
+  .promo-box p { color: var(--muted); margin-bottom: 20px; font-size: 0.96rem; }
+  .action-btn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--mint), #059669);
+    color: #030711;
+    font-weight: 800;
+    font-size: 0.95rem;
+    font-family: 'Consolas', monospace;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .promo-box.purple .action-btn {
+    background: linear-gradient(135deg, #9d50ff, #6b21a8);
+    color: #fff;
+  }
+  .action-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 210, 255, 0.35); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 28px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 30px;
+    font-family: 'Consolas', monospace;
+  }
+</style>
 </head>
 <body>
+<div id="intro-overlay">
+  <div class="intro-card">
+    <canvas id="intro-oled" width="64" height="32"></canvas>
+    <div class="intro-text" id="intro-speech"></div>
+    <button class="agree-btn" id="agree-btn">Да, я согласен</button>
+  </div>
+</div>
+
+<div id="action-dimmer"></div>
+<div id="bemri-actor">
+  <canvas id="actor-oled" width="64" height="32"></canvas>
+  <div class="actor-speech" id="actor-speech">Ты лучший для меня!</div>
+</div>
+
+<canvas id="shatter-canvas"></canvas>
+<canvas id="bg-canvas"></canvas>
 
 <header>
-    <div class="logo">BEMRI<span>CORE</span> AI</div>
-    <nav>
-        <a href="#updates">Обновление 2.0</a>
+  <div class="nav">
+    <div class="logo">BEMRI CORE // КЛАН (BM)</div>
+    <div class="nav-right">
+      <div class="nav-links">
         <a href="#features">Возможности</a>
-        <a href="#install">Установка</a>
-        <a href="#support">Обратная связь</a>
+        <a href="#community">Клан (BM) и MAX</a>
         <a href="#download">Скачать</a>
-    </nav>
+      </div>
+      <button class="music-toggle" id="music-btn">ЗВУК: ВКЛ</button>
+    </div>
+  </div>
 </header>
 
-<section class="hero" id="download">
-    <div class="badge">🔥 ОБНОВЛЕНИЕ BETA 2.0 • WINDOWS 10 / 11 • ARTEM(BM)</div>
-    <div class="clan-banner">⚡ ЗАХОДИ В (BM)!!! ⚡</div>
-    <h1>Бемри — живой ИИ бот с характером, душой и голосом</h1>
-    <p>Официальный сайт модульного ИИ проекта <strong>Бемри (BemriCore)</strong> от <strong>ARTEM(BM)</strong>. Настоящая 8-папочная архитектура на C++ с 60-FPS анимированным лицом, нейросетевой шиной памяти, русской озвучкой, самообучением из сети и живыми эмоциями.</p>
-    <div class="beta-notice">
-        ⚠️ <strong>Активная разработка (Beta 2.0):</strong> Бемри уже умеет знакомиться, вычислять год рождения, искать ответы в сети и запоминать их навсегда, но проект продолжает расти. <strong>Следите за новыми апдейтами!</strong>
+<main class="container">
+  <section class="hero">
+    <div class="reveal">
+      <div class="badge">PIXEL C++11 ENGINE • CLAN (BM)</div>
+      <h1>Пиксельный цифровой разум в твоём Windows</h1>
+      <p>
+        BEMRI CORE — автономный пиксельный ИИ от <strong>ARTEM BM</strong> с живым 60-FPS OLED-лицом,
+        руками, эмоциями, памятью и возможностью экспериментировать с кодом.
+      </p>
+      <div class="cta-group" id="download">
+        <button class="btn-primary" id="dl-btn">Скачать BEMRI 2.0 (.ZIP)</button>
+        <div class="destroyed-note" id="destroyed-note">
+          Загрузка началась! Бемри разбил кнопку от радости — обнови страницу, чтобы вернуть её.
+        </div>
+      </div>
+      <div class="stats-bar">
+        <div class="stat-pill">Просмотров: <strong id="view-count">...</strong></div>
+        <div class="stat-pill">Скачиваний: <strong id="dl-count">...</strong></div>
+      </div>
     </div>
-    <a href="Bemri 2.0.zip" download="Bemri 2.0.zip" class="btn-download" onclick="registerDownload()">⬇ СКАЧАТЬ БЕМРИ (BETA 2.0)</a>
-    <div class="stats-bar">
-        <div class="stat-pill">👁 Просмотров страницы: <strong id="viewCount">...</strong></div>
-        <div class="stat-pill dl">⬇ Скачиваний архива: <strong id="dlCount">...</strong></div>
-    </div>
-    <div class="meta-info">Архив ZIP (Bemri 2.0.zip) • Бесплатно • Не требует установки • Разработчик: ARTEM(BM)</div>
-</section>
-<section class="section" id="updates">
-    <h2>🆕 Что нового в обновлении Beta 2.0?</h2>
-    <div class="changelog-box">
-        <ul>
-            <li><strong>8-папочная модульная архитектура ядра:</strong> интерфейс, рендер лица, звук, психика, математика и нейролингвистика теперь работают как независимые модули через общую шину памяти.</li>
-            <li><strong>Окно знакомства и досье пользователя:</strong> при первом запуске Бемри спрашивает имя, фамилию и возраст, сам вычисляет твой год рождения и обращается к тебе лично.</li>
-            <li><strong>Самообучение и поиск знаний:</strong> если Бемри встречает незнакомое слово или вопрос, он задумывается (<code>BEMRI: Думает...</code>), находит ответ, запоминает его в базу и дальше отвечает как свои собственные знания.</li>
-            <li><strong>Обновлённое 60-FPS лицо и глубокая психика:</strong> убраны уши, добавлены двойные блики в глазах, плавные слёзы при обидах, крик при мате (пока не попросишь прощения) и реакция шока на пугающие истории.</li>
-            <li><strong>Рекурсивный решатель примеров:</strong> Бемри теперь без труда считает длинные цепочки вроде <code>1-1-1--21-2--2</code>, скобки, степени и корни.</li>
-        </ul>
-    </div>
-</section>
 
-<section class="section" id="features">
-    <h2>Главные возможности Бемри</h2>
+    <div class="oled-stage reveal">
+      <canvas id="pixel-oled" width="96" height="48"></canvas>
+      <div class="bemri-speech" id="bemri-speech">Привет! Я Бемри! Нажми на меня — расскажу историю!</div>
+      <button class="next-phrase-btn" id="next-phrase-btn">Ещё фраза от Бемри</button>
+    </div>
+  </section>
+
+  <section id="features" class="reveal">
+    <h2 class="sec-title">Особенности ядра BEMRI</h2>
+    <p class="sec-sub">Спроектирован с нуля на C++ — быстрый отклик, живой характер и постоянные обновления.</p>
     <div class="grid">
-        <div class="card">
-            <h3>😊 Живые эмоции и 60 FPS лицо</h3>
-            <p>Бемри реагирует на каждое слово: радуется похвале, плачет от обид, орёт на мат, падает в обморок от ужасов и меняет мимику на OLED-дисплее.</p>
-        </div>
-        <div class="card">
-            <h3>🔊 Эмоциональная озвучка</h3>
-            <p>Встроенный голосовой синтезатор озвучивает ответы на русском языке в реальном времени, меняя высоту и скорость голоса под настроение.</p>
-        </div>
-        <div class="card">
-            <h3>🧠 Самообучаемая память</h3>
-            <p>Бемри запоминает твоё имя, год рождения, личные факты и выученные ответы в локальные файлы памяти, становясь умнее с каждым диалогом.</p>
-        </div>
-        <div class="card">
-            <h3>🌐 Знания, игры и математика</h3>
-            <p>Решает длинные математические выражения, играет в угадай число, загадки и «камень-ножницы-бумага», а также находит справки о мире.</p>
-        </div>
+      <div class="card">
+        <canvas class="sticker-canvas" data-mood="happy" width="64" height="48"></canvas>
+        <h3>60 FPS Пиксельный OLED</h3>
+        <p>Честная пиксельная графика 96×48 с плавной анимацией взгляда, моргания, эмоций и жестов.</p>
+      </div>
+      <div class="card">
+        <canvas class="sticker-canvas" data-mood="think" width="64" height="48"></canvas>
+        <h3>Память и обучение</h3>
+        <p>Запоминает твоё имя, факты из диалога, сохраняет знания на диск и строит граф ассоциаций.</p>
+      </div>
+      <div class="card">
+        <canvas class="sticker-canvas" data-mood="wink" width="64" height="48"></canvas>
+        <h3>Живой характер</h3>
+        <p>Умеет радоваться, обижаться, реагировать на отношение, играть в мини-игры и решать примеры.</p>
+      </div>
+      <div class="card">
+        <canvas class="sticker-canvas" data-mood="hype" width="64" height="48"></canvas>
+        <h3>Регулярные обновления</h3>
+        <p>В разработке новые версии с анимированными руками, реакцией на курсор, звуками и модами.</p>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="section" id="install">
-    <h2>Как запустить Бемри на ПК</h2>
-    <div class="steps">
-        <div class="step-item">
-            <strong>Шаг 1. Скачай архив Bemri 2.0.zip</strong>
-            <span>Нажми на кнопку «Скачать Бемри (Beta 2.0)» выше и дождись загрузки архива на компьютер.</span>
-        </div>
-        <div class="step-item">
-            <strong>Шаг 2. Распакуй в любую папку</strong>
-            <span>Извлеки все файлы из архива в отдельную папку на рабочем столе или диске.</span>
-        </div>
-        <div class="step-item">
-            <strong>Шаг 3. Запусти BemriChat.exe и познакомься</strong>
-            <span>Открой <code>BemriChat.exe</code>, введи своё имя, фамилию и возраст в окне анкеты — после анимации загрузки откроется чистый чат с Бемри!</span>
-        </div>
-    </div>
-</section>
+  <section id="community" class="reveal">
+    <div class="clan-max-grid">
+      <div class="promo-box">
+        <canvas class="sticker-canvas" data-mood="hype" width="64" height="48"></canvas>
+        <h2>Вступай в наш клан (BM)!</h2>
+        <p>
+          Ищешь команду, общение и новости по разработке Бемри из первых рук?
+          Присоединяйся к клану <strong>(BM)</strong> — будем тестировать обновления и играть вместе!
+        </p>
+        <button class="action-btn" id="copy-clan-btn">Скопировать клан: (BM)</button>
+      </div>
 
-<section class="section" id="support">
-    <div class="support-box">
-        <h3>🛠 Обратная связь и баг-репорты</h3>
-        <p>Нашли ошибку, недочёт в бета-версии или есть идея, чему ещё научить Бемри? Напишите сообщение напрямую разработчику <strong>ARTEM(BM)</strong>!</p>
-        <form class="feedback-form" onsubmit="sendFeedback(event)">
-            <input type="text" id="fbName" placeholder="Твоё имя или ник" required>
-            <select id="fbType">
-                <option value="Баг / недочёт">🐞 Нашёл баг или недочёт</option>
-                <option value="Идея для обновления">💡 Идея для обновления Бемри</option>
-                <option value="Вопрос">❓ Вопрос по программе</option>
-            </select>
-            <textarea id="fbText" rows="4" placeholder="Опиши подробно проблему или идею..." required></textarea>
-            <button type="submit" class="btn-send">📨 ОТПРАВИТЬ СООБЩЕНИЕ</button>
-            <div class="form-status" id="fbStatus">✅ Спасибо! Сообщение записано для ARTEM(BM).</div>
-        </form>
-        <div class="max-contact">
-            Также для быстрой связи в мессенджере MAX: <span>[Впиши сюда свой ник в MAX]</span>
-        </div>
+      <div class="promo-box purple">
+        <canvas class="sticker-canvas" data-mood="happy" width="64" height="48"></canvas>
+        <h2>Нашёл баг или есть идея?</h2>
+        <p>
+          Пиши напрямую создателю в <strong>MAX</strong> по нику <strong>ARTEM BM</strong> —
+          сообщай об ошибках, проблемах при запуске или предлагай новые фишки для Бемри!
+        </p>
+        <button class="action-btn" id="copy-max-btn">Скопировать ник: ARTEM BM</button>
+      </div>
     </div>
-</section>
+  </section>
+</main>
 
 <footer>
-    <p>© 2026 Бемри (BemriCore AI — Beta 2.0) — ИИ бот для Windows. Создатель проекта: ARTEM(BM).</p>
-    <p class="clan-footer">ЗАХОДИ В (BM)!!!</p>
+  © 2026 BEMRI CORE PROJECT • Клан (BM) • Разработчик ARTEM BM
 </footer>
 
 <script>
-    const NS = "artem777gulaev_bemricore_ai";
+  let audioCtx = null, musicEnabled = true, musicStarted = false;
 
-    async function loadStats() {
-        try {
-            const vRes = await fetch("https://counterapi.dev" + NS + "/views/up");
-            const vData = await vRes.json();
-            document.getElementById("viewCount").textContent = vData.count || 1;
-        } catch (e) {
-            document.getElementById("viewCount").textContent = "1";
-        }
-        try {
-            const dRes = await fetch("https://counterapi.dev" + NS + "/downloads");
-            const dData = await dRes.json();
-            document.getElementById("dlCount").textContent = dData.count || 0;
-        } catch (e) {
-            document.getElementById("dlCount").textContent = "0";
-        }
+  function initAudio() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }
+
+  function playTone(freq, dur, type = 'sine', vol = 0.06, delay = 0) {
+    if (!audioCtx || !musicEnabled) return;
+    const now = audioCtx.currentTime + delay;
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(vol, now + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now); osc.stop(now + dur + 0.02);
+  }
+
+  function playCrispStartSound() {
+    initAudio();
+    const startNotes = new Array(523.25, 783.99, 1046.50, 1318.51);
+    startNotes.forEach((f, idx) => playTone(f, 0.45, 'triangle', 0.11, idx * 0.045));
+  }
+
+  function playHoverSound() { playTone(660, 0.07, 'sine', 0.025, 0); }
+  function playClickSound() { playTone(880, 0.11, 'triangle', 0.07, 0); playTone(1174.66, 0.12, 'sine', 0.05, 0.04); }
+  function playVoiceBlip()  { playTone(380 + Math.random() * 140, 0.045, 'triangle', 0.022, 0); }
+
+  function playWhooshSound() {
+    initAudio();
+    if (!audioCtx || !musicEnabled) return;
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.exponentialRampToValueAtTime(640, now + 0.45);
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(0.07, now + 0.2);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now); osc.stop(now + 0.52);
+  }
+
+  function playSmashSound() {
+    initAudio();
+    const lowBoom = new Array(220, 146.83, 110, 73.42, 55);
+    const highSpark = new Array(1318.5, 1046.5, 880, 659.25);
+    lowBoom.forEach((f, i) => playTone(f, 0.38, 'sawtooth', 0.13, i * 0.03));
+    highSpark.forEach((f, i) => playTone(f, 0.18, 'square', 0.06, i * 0.025));
+  }
+
+  function playSoftPad(freqs, dur = 3.5) {
+    if (!audioCtx || !musicEnabled) return;
+    const now = audioCtx.currentTime;
+    freqs.forEach((f, idx) => {
+      const osc = audioCtx.createOscillator(), filter = audioCtx.createBiquadFilter(), gain = audioCtx.createGain();
+      osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(f, now);
+      filter.type = 'lowpass'; filter.frequency.setValueAtTime(720, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(0.028, now + 0.9);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+      osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now + dur + 0.1);
+    });
+  }
+
+  const chords = new Array(
+    new Array(130.81, 196.00, 246.94, 329.63),
+    new Array(110.00, 164.81, 220.00, 261.63),
+    new Array(87.31,  130.81, 174.61, 220.00),
+    new Array(98.00,  146.83, 196.00, 246.94)
+  );
+  let chordIdx = 0;
+
+  function startBgMusic() {
+    if (musicStarted) return;
+    initAudio(); musicStarted = true;
+    playSoftPad(chords.at(0), 3.6);
+    setInterval(() => {
+      if (!musicEnabled) return;
+      chordIdx = (chordIdx + 1) % chords.length;
+      playSoftPad(chords.at(chordIdx), 3.6);
+    }, 3300);
+  }
+  document.querySelectorAll('button, a, .card').forEach(el => {
+    el.addEventListener('mouseenter', () => { if (musicStarted) playHoverSound(); });
+    el.addEventListener('click', () => { initAudio(); playClickSound(); });
+  });
+
+  document.getElementById('music-btn').addEventListener('click', (e) => {
+    e.stopPropagation(); initAudio();
+    musicEnabled = !musicEnabled;
+    document.getElementById('music-btn').textContent = musicEnabled ? 'ЗВУК: ВКЛ' : 'ЗВУК: ВЫКЛ';
+    if (musicEnabled && !musicStarted) startBgMusic();
+  });
+
+  function drawBemriMini(ctx, w, h, tick, mood = 'happy', punchOffset = 0) {
+    ctx.fillStyle = '#04060a'; ctx.fillRect(0, 0, w, h);
+    const col = (mood === 'hype' || mood === 'happy') ? '#28f582' : (mood === 'wink' ? '#9d50ff' : '#00d2ff');
+    const cx = Math.floor(w / 2), cy = Math.floor(h / 2) + Math.round(Math.sin(tick * 0.1) * 1);
+    const R = Math.min(14, Math.floor(h * 0.34));
+    const p = (x, y, c) => { if (x >= 0 && x < w && y >= 0 && y < h) { ctx.fillStyle = c; ctx.fillRect(x, y, 1, 1); } };
+    const circ = (x0, y0, r, c) => { for (let y = -r; y <= r; y++) for (let x = -r; x <= r; x++) if (x*x + y*y <= r*r) p(x0+x, y0+y, c); };
+
+    for (let y = -R; y <= R; y++) for (let x = -R; x <= R; x++) {
+      let d = x*x + y*y; if (d <= R*R && d >= (R-2)*(R-2)) p(cx+x, cy+y, col);
     }
+    circ(cx - R - 4, cy + 2, 2, col); p(cx - R - 4, cy + 2, '#ffffff');
+    circ(cx + R + 4, cy + 2 + punchOffset, 3, col); p(cx + R + 4, cy + 2 + punchOffset, '#ffffff');
+    circ(cx - 4, cy - 2, 2, '#ffffff'); p(cx - 4, cy - 2, col);
+    if (mood === 'wink') { p(cx + 3, cy - 2, col); p(cx + 4, cy - 2, col); p(cx + 5, cy - 2, col); }
+    else { circ(cx + 4, cy - 2, 2, '#ffffff'); p(cx + 4, cy - 2, col); }
+    for (let dx = -3; dx <= 3; dx++) p(cx + dx, cy + 5 - (mood === 'think' ? 0 : Math.floor((dx * dx) / 6)), col);
+  }
 
-    async function registerDownload() {
-        try {
-            const res = await fetch("https://counterapi.dev" + NS + "/downloads/up");
-            const data = await res.json();
-            if (data && data.count !== undefined) {
-                document.getElementById("dlCount").textContent = data.count;
-            }
-        } catch (e) {}
+  document.querySelectorAll('.sticker-canvas').forEach((cv, idx) => {
+    const sctx = cv.getContext('2d'), mood = cv.dataset.mood || 'happy';
+    let stTick = idx * 15;
+    setInterval(() => { stTick++; drawBemriMini(sctx, cv.width, cv.height, stTick, mood, 0); }, 60);
+  });
+
+  const introCtx = document.getElementById('intro-oled').getContext('2d');
+  let introTick = 0;
+  const introTimer = setInterval(() => { introTick++; drawBemriMini(introCtx, 64, 32, introTick, 'hype', 0); }, 40);
+
+  const introMsg = "Привет! Я Бемри! Обещаю, я стану для тебя отличным ИИ-помощником и другом. Согласен впустить меня?";
+  const introEl = document.getElementById('intro-speech');
+  let iPos = 0;
+  const introType = setInterval(() => {
+    iPos++; introEl.textContent = introMsg.slice(0, iPos);
+    if (musicStarted && iPos % 2 === 0) playVoiceBlip();
+    if (iPos >= introMsg.length) clearInterval(introType);
+  }, 26);
+
+  document.getElementById('agree-btn').addEventListener('click', () => {
+    playCrispStartSound(); startBgMusic();
+    document.getElementById('intro-overlay').classList.add('closed');
+    clearInterval(introTimer);
+    setTimeout(() => bemriSay("Ура! Добро пожаловать! Вступай в наш клан (BM)!"), 700);
+  });
+
+  const bemriPhrases = new Array(
+    "Эй, привет! Вступай в наш клан (BM) — там собираются самые крутые ребята!",
+    "Знаешь, каково это — жить внутри пиксельного экрана 96×48? Я вижу, как бегают байты!",
+    "Скоро выйдет большое обновление! Разработчик ARTEM BM готовит для меня новые фишки!",
+    "Однажды я считал до миллиона, но у меня зачесались пиксели и я уснул прямо в памяти...",
+    "Если найдёшь ошибку или придумаешь идею — напиши ARTEM BM в MAX, он всё читает!",
+    "В клане (BM) всегда весело! Залетай к нам, будем вместе тестировать новые версии Бемри!"
+  );
+  let lastPhraseIdx = -1, typeTimer = null, speakMouthTimer = 0;
+
+  function bemriSay(customText = null) {
+    let text = customText;
+    if (!text) {
+      let idx; do { idx = Math.floor(Math.random() * bemriPhrases.length); } while (idx === lastPhraseIdx);
+      lastPhraseIdx = idx; text = bemriPhrases.at(idx);
     }
+    const box = document.getElementById('bemri-speech');
+    if (typeTimer) clearInterval(typeTimer);
+    let pos = 0; speakMouthTimer = text.length * 2; box.textContent = '';
+    typeTimer = setInterval(() => {
+      pos++; box.textContent = text.slice(0, pos);
+      if (musicStarted && pos % 2 === 0) playVoiceBlip();
+      if (pos >= text.length) { clearInterval(typeTimer); speakMouthTimer = 0; }
+    }, 26);
+  }
 
-    function sendFeedback(e) {
-        e.preventDefault();
-        document.getElementById('fbStatus').style.display = 'block';
-        e.target.reset();
+  setInterval(() => { if (speakMouthTimer === 0) bemriSay(); }, 9000);
+  document.getElementById('next-phrase-btn').addEventListener('click', () => { initAudio(); bemriSay(); });
+
+  document.getElementById('copy-clan-btn').addEventListener('click', () => {
+    navigator.clipboard.writeText('(BM)').then(() => {
+      const b = document.getElementById('copy-clan-btn');
+      b.textContent = 'Скопировано: (BM)';
+      bemriSay("Отлично! Ждём тебя в клане (BM)!");
+      setTimeout(() => { b.textContent = 'Скопировать клан: (BM)'; }, 2500);
+    });
+  });
+
+  document.getElementById('copy-max-btn').addEventListener('click', () => {
+    navigator.clipboard.writeText('ARTEM BM').then(() => {
+      const b = document.getElementById('copy-max-btn');
+      b.textContent = 'Скопировано: ARTEM BM';
+      bemriSay("Напиши ARTEM BM в MAX — расскажи о своих идеях!");
+      setTimeout(() => { b.textContent = 'Скопировать ник: ARTEM BM'; }, 2500);
+    });
+  });
+  const oled = document.getElementById('pixel-oled'), octx = oled.getContext('2d');
+  let tick = 0, mx = -999, my = -999, hoverFace = false;
+  addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  oled.addEventListener('mouseenter', () => { hoverFace = true; if (musicStarted) playHoverSound(); });
+  oled.addEventListener('mouseleave', () => hoverFace = false);
+  oled.addEventListener('click', () => { initAudio(); playClickSound(); bemriSay(); });
+
+  function animMainOled() {
+    tick++; if (speakMouthTimer > 0) speakMouthTimer--;
+    octx.fillStyle = '#04060a'; octx.fillRect(0, 0, 96, 48);
+    const col = hoverFace ? '#28f582' : '#00d2ff', cx = 48, cy = 24 + Math.round(Math.sin(tick * 0.08) * 1.4), R = 16;
+    const px = (x, y, c) => { if (x >= 0 && x < 96 && y >= 0 && y < 48) { octx.fillStyle = c; octx.fillRect(x, y, 1, 1); } };
+    const circ = (x0, y0, r, c) => { for (let y = -r; y <= r; y++) for (let x = -r; x <= r; x++) if (x*x + y*y <= r*r) px(x0+x, y0+y, c); };
+
+    for (let y = -R; y <= R; y++) for (let x = -R; x <= R; x++) {
+      let d = x*x + y*y; if (d <= R*R && d >= (R-2)*(R-2)) px(cx+x, cy+y, col);
     }
+    const g = speakMouthTimer > 0 ? Math.round(Math.sin(tick * 0.32) * 4) : Math.round(Math.sin(tick * 0.12) * 2);
+    circ(cx - R - 6, cy + 3 + g, 3, col); circ(cx - R - 6, cy + 3 + g, 2, '#ffffff');
+    circ(cx + R + 6, cy + 3 - g, 3, col); circ(cx + R + 6, cy + 3 - g, 2, '#ffffff');
+    circ(cx - 9, cy + 2, 2, '#ff6e14'); circ(cx + 9, cy + 2, 2, '#ff6e14');
 
-    loadStats();
+    const lx = mx > 0 ? Math.max(-1, Math.min(1, Math.round((mx - innerWidth / 2) / 180))) : 0;
+    if ((tick % 110) < 6) { for (let dx = -3; dx <= 3; dx++) { px(cx - 6 + dx, cy - 2, col); px(cx + 6 + dx, cy - 2, col); } }
+    else { circ(cx - 6, cy - 3, 3, '#ffffff'); circ(cx + 6, cy - 3, 3, '#ffffff'); circ(cx - 6 + lx, cy - 3, 1, col); circ(cx + 6 + lx, cy - 3, 1, col); }
+    if (speakMouthTimer > 0 && (tick % 8 < 4)) circ(cx, cy + 7, 3, '#ff4560');
+    else for (let dx = -5; dx <= 5; dx++) px(cx + dx, cy + 7 - Math.floor((dx*dx)/10), col);
+    requestAnimationFrame(animMainOled);
+  }
+  animMainOled();
+
+  const dlBtn = document.getElementById('dl-btn'), dimmer = document.getElementById('action-dimmer');
+  const actor = document.getElementById('bemri-actor'), actorCtx = document.getElementById('actor-oled').getContext('2d');
+  const shatterCanvas = document.getElementById('shatter-canvas'), shatterCtx = shatterCanvas.getContext('2d');
+  let shards = new Array(), buttonDestroyed = false, punchAnim = 0;
+
+  function resizeShatter() { shatterCanvas.width = innerWidth; shatterCanvas.height = innerHeight; }
+  addEventListener('resize', resizeShatter); resizeShatter();
+  setInterval(() => { if (actor.classList.contains('visible')) drawBemriMini(actorCtx, 64, 32, tick, 'hype', punchAnim); }, 35);
+
+  function spawnShards(rect) {
+    const colors = new Array('#00d2ff', '#28f582', '#ffffff', '#0088ff', '#ffae00');
+    for (let i = 0; i < 140; i++) {
+      shards.push({
+        x: rect.left + Math.random() * rect.width, y: rect.top + Math.random() * rect.height,
+        vx: (Math.random() - 0.5) * 11, vy: -3 - Math.random() * 8, g: 0.32,
+        size: 5 + Math.floor(Math.random() * 6), life: 1.0, color: colors.at(Math.floor(Math.random() * colors.length))
+      });
+    }
+  }
+
+  function animShards() {
+    shatterCtx.clearRect(0, 0, shatterCanvas.width, shatterCanvas.height);
+    for (let i = shards.length - 1; i >= 0; i--) {
+      let s = shards.at(i); s.x += s.vx; s.y += s.vy; s.vy += s.g; s.life -= 0.015;
+      if (s.life <= 0) { shards.splice(i, 1); continue; }
+      shatterCtx.globalAlpha = s.life; shatterCtx.fillStyle = s.color;
+      shatterCtx.fillRect(Math.floor(s.x / 3) * 3, Math.floor(s.y / 3) * 3, s.size, s.size);
+    }
+    shatterCtx.globalAlpha = 1; requestAnimationFrame(animShards);
+  }
+  animShards();
+
+  dlBtn.addEventListener('click', () => {
+    if (buttonDestroyed) return;
+    buttonDestroyed = true;
+    const btnRect = dlBtn.getBoundingClientRect(), oledRect = oled.getBoundingClientRect();
+    dimmer.classList.add('active'); dlBtn.classList.add('illuminated');
+    playWhooshSound();
+
+    actor.style.left = Math.max(12, oledRect.left) + 'px';
+    actor.style.top  = Math.max(12, oledRect.top) + 'px';
+    actor.classList.add('visible');
+    document.getElementById('actor-speech').textContent = "Ты лучший для меня! Смотри, как я нажму на кнопку!";
+
+    setTimeout(() => {
+      actor.style.left = Math.max(12, btnRect.left + btnRect.width / 2 - 140) + 'px';
+      actor.style.top  = Math.max(12, btnRect.top - 165) + 'px';
+    }, 60);
+
+    setTimeout(() => {
+      punchAnim = 8; playSmashSound(); spawnShards(btnRect);
+      dlBtn.classList.remove('illuminated'); dlBtn.classList.add('destroyed');
+      document.getElementById('destroyed-note').style.display = 'block';
+      document.getElementById('actor-speech').textContent = "Ой! Кажется, я слишком сильно нажал... Загрузка пошла!";
+      fetch(`https://counterapi.dev{NS}/downloads/up`).then(r => r.json()).then(d => { if (d.count) document.getElementById('dl-count').textContent = d.count; });
+      const a = document.createElement('a'); a.href = 'Bemri%202.0.zip'; a.download = 'Bemri 2.0.zip';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }, 1250);
+
+    setTimeout(() => {
+      punchAnim = 0; playWhooshSound();
+      actor.style.left = Math.max(12, oledRect.left) + 'px'; actor.style.top = Math.max(12, oledRect.top) + 'px';
+    }, 2400);
+    setTimeout(() => {
+      actor.classList.remove('visible'); dimmer.classList.remove('active');
+      bemriSay("Хе-хе, кнопка разлетелась от моего удара! Чтобы вернуть её — перезагрузи страницу!");
+    }, 3050);
+  });
+
+  const bg = document.getElementById('bg-canvas'), bctx = bg.getContext('2d');
+  let w, h, pts = new Array();
+  function resizeBg() { w = bg.width = innerWidth; h = bg.height = innerHeight; }
+  addEventListener('resize', resizeBg); resizeBg();
+  for (let i = 0; i < 42; i++) pts.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4 });
+  function animBg() {
+    bctx.clearRect(0, 0, w, h);
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      bctx.fillStyle = 'rgba(0, 210, 255, 0.45)';
+      bctx.fillRect(Math.floor(p.x / 4) * 4, Math.floor(p.y / 4) * 4, 4, 4);
+    });
+    requestAnimationFrame(animBg);
+  }
+  animBg();
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  const NS = 'artem777gulaev_bemri_v2';
+  fetch(`https://counterapi.dev{NS}/views/up`).then(r => r.json()).then(d => document.getElementById('view-count').textContent = d.count || 1).catch(() => document.getElementById('view-count').textContent = '1');
+  fetch(`https://counterapi.dev{NS}/downloads`).then(r => r.json()).then(d => document.getElementById('dl-count').textContent = d.count || 0).catch(() => document.getElementById('dl-count').textContent = '0');
 </script>
-
 </body>
 </html>
